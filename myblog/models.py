@@ -5,6 +5,7 @@ class Category(models.Model):
     """
         Model for Category Name
     """
+
     name = models.CharField('CATEGORY', max_length=255)
     created_at = models.DateTimeField('CreateDate', default=timezone.now)
 
@@ -25,3 +26,16 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    """
+        Add Comments Field
+    """
+
+    name = models.CharField('Name : ', max_length=30, default='Anon')
+    text = models.TextField('Content')
+    post = models.ForeignKey(Post, verbose_name='Article Name', on_delete=models.PROTECT)
+    created_at = models.DateField('Create DateTime', default=timezone.now)
+
+    def __str__(self):
+        return self.text[:10]
